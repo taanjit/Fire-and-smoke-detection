@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Union, List, Optional, Dict
 import cv2
 import numpy as np
+import base64
 from ultralytics import YOLO
 from fire_smoke_detection.utils.common import ensure_path_exists, get_timestamp
 
@@ -62,7 +63,8 @@ class FireSmokeDetector:
         image_path: Union[str, Path],
         save: bool = True,
         save_dir: Optional[Path] = None,
-        show: bool = False
+        show: bool = False,
+        return_base64: bool = False
     ) -> Dict:
         """
         Predict on a single image
@@ -92,12 +94,22 @@ class FireSmokeDetector:
         # Extract detections
         detections = self._extract_detections(results[0])
         
-        logger.info(f"Found {len(detections)} detections")
-        return {
+        response = {
             'image_path': str(image_path),
             'detections': detections,
             'num_detections': len(detections)
         }
+        
+        if return_base64:
+            # Plot results on image
+            plotted_img = results[0].plot()
+            # Convert to base64
+            _, buffer = cv2.imencode('.jpg', plotted_img)
+            img_base64 = base64.b64encode(buffer).decode('utf-8')
+            response['image_base64'] = img_base64
+            
+        logger.info(f"Found {len(detections)} detections")
+        return response
     
     def predict_batch(
         self,

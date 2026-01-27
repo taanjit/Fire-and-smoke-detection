@@ -3,7 +3,7 @@ Flask REST API for Fire and Smoke Detection
 Provides HTTP endpoints for inference
 """
 
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, render_template
 from flask_cors import CORS
 import os
 import base64
@@ -15,7 +15,7 @@ from fire_smoke_detection.inference.predictor import FireSmokeDetector
 
 
 # Initialize Flask app
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', template_folder='templates')
 CORS(app)  # Enable CORS for all routes
 
 # Initialize detector
@@ -24,9 +24,19 @@ detector = FireSmokeDetector(
     conf_threshold=0.25
 )
 
-# Create upload folder
+# Create folders
 UPLOAD_FOLDER = Path("uploads")
 UPLOAD_FOLDER.mkdir(exist_ok=True)
+STATIC_DIR = Path("static")
+STATIC_DIR.mkdir(exist_ok=True)
+(STATIC_DIR / "css").mkdir(exist_ok=True, parents=True)
+(STATIC_DIR / "js").mkdir(exist_ok=True, parents=True)
+
+
+@app.route('/', methods=['GET'])
+def index():
+    """Serve the main web interface"""
+    return render_template('index.html')
 
 
 @app.route('/health', methods=['GET'])
@@ -79,9 +89,8 @@ def predict():
     
     try:
         # Run prediction
-        result = detector.predict_image(file_path, save=False)
+        result = detector.predict_image(file_path, save=False, return_base64=True)
         
-        # Get image size
         img = Image.open(file_path)
         image_size = {'width': img.width, 'height': img.height}
         
@@ -91,14 +100,16 @@ def predict():
         return jsonify({
             'detections': result['detections'],
             'num_detections': result['num_detections'],
-            'image_size': image_size
+            'image_base64': result.get('image_base64'),
+            'image_size': image_size,
+            'status': 'success'
         })
     
     except Exception as e:
         # Clean up on error
         if file_path.exists():
             file_path.unlink()
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': str(e), 'status': 'error'}), 500
 
 
 @app.route('/predict/base64', methods=['POST'])
