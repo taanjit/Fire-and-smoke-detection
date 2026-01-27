@@ -1,0 +1,68 @@
+# Project Configuration File
+# This file contains all the paths and configuration details for the fire and smoke detection project
+
+artifacts_root: artifacts
+
+# Data Ingestion Configuration
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  source_dir: data
+  train_data_path: data/train
+  test_data_path: data/test
+  train_images: data/train/images
+  train_labels: data/train/labels
+  test_images: data/test/images
+  test_labels: data/test/labels
+
+# Data Validation Configuration
+data_validation:
+  root_dir: artifacts/data_validation
+  status_file: artifacts/data_validation/status.txt
+  required_files:
+    - train/images
+    - train/labels
+    - test/images
+    - test/labels
+
+# Data Transformation Configuration
+data_transformation:
+  root_dir: artifacts/data_transformation
+  transformed_train_dir: artifacts/data_transformation/train
+  transformed_test_dir: artifacts/data_transformation/test
+  augmented_data_dir: artifacts/data_transformation/augmented
+  image_size: [640, 640]  # Standard YOLO input size
+  
+# Model Training Configuration
+model_training:
+  root_dir: artifacts/model_training
+  model_name: yolov8n.pt  # YOLOv8 nano (can change to yolov8s, yolov8m, yolov8l, yolov8x)
+  trained_model_path: artifacts/model_training/best.pt
+  training_data: artifacts/data_transformation/train
+  model_config_path: artifacts/model_training/model_config.yaml
+  
+# Model Evaluation Configuration
+model_evaluation:
+  root_dir: artifacts/model_evaluation
+  test_data_path: artifacts/data_transformation/test
+  model_path: artifacts/model_training/best.pt
+  metrics_file: artifacts/model_evaluation/metrics.json
+  confusion_matrix_path: artifacts/model_evaluation/confusion_matrix.png
+  predictions_dir: artifacts/model_evaluation/predictions
+
+# Model Deployment Configuration
+model_deployment:
+  model_path: artifacts/model_training/best.pt
+  confidence_threshold: 0.25
+  iou_threshold: 0.45
+  max_detections: 100
+
+# Class Names
+classes:
+  - fire
+  - smoke
+
+# Logging Configuration
+logging:
+  level: INFO
+  format: "[%(asctime)s: %(levelname)s: %(module)s: %(message)s]"
+  log_file: artifacts/logs/project.log

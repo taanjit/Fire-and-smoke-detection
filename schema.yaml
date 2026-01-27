@@ -1,0 +1,165 @@
+# Data Schema Validation File
+# This file defines the expected structure and validation rules for the dataset
+
+# Dataset Structure Schema
+dataset_structure:
+  required_directories:
+    - train
+    - test
+    - train/images
+    - train/labels
+    - test/images
+    - test/labels
+  
+  optional_directories:
+    - valid
+    - valid/images
+    - valid/labels
+
+# Image File Schema
+image_files:
+  allowed_extensions:
+    - .jpg
+    - .jpeg
+    - .png
+    - .bmp
+    - .tiff
+  
+  min_resolution:
+    width: 320
+    height: 320
+  
+  max_resolution:
+    width: 4096
+    height: 4096
+  
+  max_file_size_mb: 10
+  
+  color_mode:
+    - RGB
+    - BGR
+  
+  bit_depth:
+    - 8
+    - 16
+
+# Label File Schema (YOLO format)
+label_files:
+  format: yolo  # YOLO format: <class_id> <x_center> <y_center> <width> <height>
+  
+  allowed_extensions:
+    - .txt
+  
+  class_ids:
+    fire: 0
+    smoke: 1
+  
+  num_classes: 2
+  
+  coordinate_range:
+    min: 0.0
+    max: 1.0
+  
+  # Each line format: class_id x_center y_center width height
+  # All coordinates normalized to [0, 1]
+  line_format:
+    fields:
+      - class_id
+      - x_center
+      - y_center
+      - width
+      - height
+    
+    field_types:
+      class_id: int
+      x_center: float
+      y_center: float
+      width: float
+      height: float
+    
+    field_constraints:
+      class_id:
+        min: 0
+        max: 1
+      x_center:
+        min: 0.0
+        max: 1.0
+      y_center:
+        min: 0.0
+        max: 1.0
+      width:
+        min: 0.0
+        max: 1.0
+      height:
+        min: 0.0
+        max: 1.0
+
+# Dataset Statistics Schema
+dataset_statistics:
+  min_images_per_split:
+    train: 100
+    test: 20
+    valid: 10
+  
+  min_annotations_per_image: 0  # Can be 0 for negative samples
+  max_annotations_per_image: 100
+  
+  class_balance:
+    check_imbalance: true
+    max_imbalance_ratio: 10.0  # Max ratio between most and least common class
+
+# Data Quality Checks
+quality_checks:
+  check_image_corruption: true
+  check_label_existence: true  # Each image should have corresponding label file
+  check_empty_labels: true
+  check_duplicate_images: true
+  check_coordinate_validity: true
+  check_class_id_validity: true
+  
+  # Warnings (non-blocking)
+  warn_on_missing_labels: true
+  warn_on_small_objects: true
+  min_object_size: 0.01  # Minimum object size (normalized)
+
+# File Naming Convention
+naming_convention:
+  image_label_match: true  # Image and label files must have same basename
+  allowed_characters: "a-zA-Z0-9_-"
+  case_sensitive: true
+
+# Metadata Schema
+metadata:
+  dataset_name: fire_smoke_detection
+  version: "1.0"
+  description: "Fire and smoke detection dataset for object detection"
+  
+  classes:
+    - name: fire
+      id: 0
+      description: "Fire flames"
+    
+    - name: smoke
+      id: 1
+      description: "Smoke plumes"
+  
+  annotation_format: yolo
+  task_type: object_detection
+
+# Validation Rules
+validation_rules:
+  strict_mode: false  # If true, fail on any validation error
+  
+  required_validations:
+    - directory_structure
+    - file_extensions
+    - image_integrity
+    - label_format
+    - coordinate_range
+    - class_ids
+  
+  optional_validations:
+    - image_resolution
+    - file_size
+    - class_balance
+    - duplicate_detection

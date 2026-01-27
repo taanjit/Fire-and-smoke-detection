@@ -1,0 +1,50 @@
+# Pipeline Configuration
+# Configure pipeline execution behavior
+
+# Pipeline Execution
+pipeline:
+  # Enable/disable stages
+  enable_validation: true
+  enable_transformation: true
+  enable_training: true
+  enable_evaluation: true
+  
+  # Error handling
+  stop_on_error: true
+  retry_on_failure: false
+  max_retries: 3
+  
+  # Logging
+  verbose: true
+  save_logs: true
+  log_dir: artifacts/logs
+  
+  # Reporting
+  save_report: true
+  report_dir: artifacts/reports
+
+# Stage-specific settings
+stages:
+  validation:
+    strict_mode: false
+    fail_on_warnings: false
+  
+  transformation:
+    overwrite_existing: true
+    validate_output: true
+  
+  training:
+    save_checkpoints: true
+    checkpoint_frequency: 10  # epochs
+    early_stopping: true
+  
+  evaluation:
+    save_predictions: true
+    num_prediction_samples: 10
+    generate_visualizations: true
+
+# Resource Management
+resources:
+  gpu_memory_fraction: 0.9
+  num_workers: 8
+  batch_size_auto_adjust: false
