@@ -10,6 +10,9 @@ Pillow>=10.0.0
 # REST API
 flask>=3.0.0
 flask-cors>=4.0.0
+python-box>=7.0.0
+ensure>=1.0.2
+PyYAML>=6.0
 
 # Optional: Production server
 gunicorn>=21.2.0
