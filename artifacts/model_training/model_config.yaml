@@ -1,0 +1,207 @@
+augmentation: !!python/object/new:box.config_box.ConfigBox
+  dictitems:
+    copy_paste: 0.0
+    degrees: 0.0
+    fliplr: 0.5
+    flipud: 0.0
+    hsv_h: 0.015
+    hsv_s: 0.7
+    hsv_v: 0.4
+    mixup: 0.0
+    mosaic: 1.0
+    perspective: 0.0
+    scale: 0.5
+    shear: 0.0
+    translate: 0.1
+  state:
+    _box_config:
+      __created: true
+      __safe_keys:
+        copy_paste: copy_paste
+        degrees: degrees
+        fliplr: fliplr
+        flipud: flipud
+        hsv_h: hsv_h
+        hsv_s: hsv_s
+        hsv_v: hsv_v
+        mixup: mixup
+        mosaic: mosaic
+        perspective: perspective
+        scale: scale
+        shear: shear
+        translate: translate
+      box_class: &id001 !!python/name:box.config_box.ConfigBox ''
+      box_dots: false
+      box_duplicates: ignore
+      box_intact_types: !!python/tuple []
+      box_namespace: !!python/tuple
+      - AUGMENTATION
+      box_recast: null
+      box_safe_prefix: x
+      camel_killer_box: false
+      conversion_box: true
+      default_box: false
+      default_box_attr: *id001
+      default_box_create_on_get: true
+      default_box_none_transform: true
+      frozen_box: false
+      modify_tuples_box: false
+image: !!python/object/new:box.config_box.ConfigBox
+  dictitems:
+    input_size: 640
+    mean: !!python/object/new:box.box_list.BoxList
+      listitems:
+      - 0.485
+      - 0.456
+      - 0.406
+      state:
+        box_options:
+          box_class: *id001
+          box_dots: false
+          box_duplicates: ignore
+          box_intact_types: !!python/tuple []
+          box_namespace: !!python/tuple
+          - IMAGE
+          - mean
+          box_recast: null
+          box_safe_prefix: x
+          camel_killer_box: false
+          conversion_box: true
+          default_box: false
+          default_box_attr: *id001
+          default_box_create_on_get: true
+          default_box_none_transform: true
+          frozen_box: false
+          modify_tuples_box: false
+        box_org_ref: null
+    normalize: true
+    std: !!python/object/new:box.box_list.BoxList
+      listitems:
+      - 0.229
+      - 0.224
+      - 0.225
+      state:
+        box_options:
+          box_class: *id001
+          box_dots: false
+          box_duplicates: ignore
+          box_intact_types: !!python/tuple []
+          box_namespace: !!python/tuple
+          - IMAGE
+          - std
+          box_recast: null
+          box_safe_prefix: x
+          camel_killer_box: false
+          conversion_box: true
+          default_box: false
+          default_box_attr: *id001
+          default_box_create_on_get: true
+          default_box_none_transform: true
+          frozen_box: false
+          modify_tuples_box: false
+        box_org_ref: null
+  state:
+    _box_config:
+      __created: true
+      __safe_keys:
+        input_size: input_size
+        mean: mean
+        normalize: normalize
+        std: std
+      box_class: *id001
+      box_dots: false
+      box_duplicates: ignore
+      box_intact_types: !!python/tuple []
+      box_namespace: !!python/tuple
+      - IMAGE
+      box_recast: null
+      box_safe_prefix: x
+      camel_killer_box: false
+      conversion_box: true
+      default_box: false
+      default_box_attr: *id001
+      default_box_create_on_get: true
+      default_box_none_transform: true
+      frozen_box: false
+      modify_tuples_box: false
+model:
+  architecture: yolov8
+  pretrained: true
+  variant: n
+training: !!python/object/new:box.config_box.ConfigBox
+  dictitems:
+    amp: true
+    batch_size: 16
+    device: 0
+    epochs: 100
+    learning_rate: 0.01
+    lr_decay_epochs: !!python/object/new:box.box_list.BoxList
+      listitems:
+      - 70
+      - 90
+      state:
+        box_options:
+          box_class: *id001
+          box_dots: false
+          box_duplicates: ignore
+          box_intact_types: !!python/tuple []
+          box_namespace: !!python/tuple
+          - TRAINING
+          - lr_decay_epochs
+          box_recast: null
+          box_safe_prefix: x
+          camel_killer_box: false
+          conversion_box: true
+          default_box: false
+          default_box_attr: *id001
+          default_box_create_on_get: true
+          default_box_none_transform: true
+          frozen_box: false
+          modify_tuples_box: false
+        box_org_ref: null
+    lr_decay_factor: 0.1
+    lr_scheduler: cosine
+    momentum: 0.937
+    optimizer: SGD
+    patience: 50
+    warmup_bias_lr: 0.1
+    warmup_epochs: 3
+    warmup_momentum: 0.8
+    weight_decay: 0.0005
+    workers: 0
+  state:
+    _box_config:
+      __created: true
+      __safe_keys:
+        amp: amp
+        batch_size: batch_size
+        device: device
+        epochs: epochs
+        learning_rate: learning_rate
+        lr_decay_epochs: lr_decay_epochs
+        lr_decay_factor: lr_decay_factor
+        lr_scheduler: lr_scheduler
+        momentum: momentum
+        optimizer: optimizer
+        patience: patience
+        warmup_bias_lr: warmup_bias_lr
+        warmup_epochs: warmup_epochs
+        warmup_momentum: warmup_momentum
+        weight_decay: weight_decay
+        workers: workers
+      box_class: *id001
+      box_dots: false
+      box_duplicates: ignore
+      box_intact_types: !!python/tuple []
+      box_namespace: !!python/tuple
+      - TRAINING
+      box_recast: null
+      box_safe_prefix: x
+      camel_killer_box: false
+      conversion_box: true
+      default_box: false
+      default_box_attr: *id001
+      default_box_create_on_get: true
+      default_box_none_transform: true
+      frozen_box: false
+      modify_tuples_box: false
