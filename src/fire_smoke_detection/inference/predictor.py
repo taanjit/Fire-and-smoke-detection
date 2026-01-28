@@ -9,6 +9,7 @@ from typing import Union, List, Optional, Dict
 import cv2
 import numpy as np
 import base64
+import torch
 from ultralytics import YOLO
 from fire_smoke_detection.utils.common import ensure_path_exists, get_timestamp
 
@@ -47,7 +48,13 @@ class FireSmokeDetector:
         self.model_path = Path(model_path)
         self.conf_threshold = conf_threshold
         self.iou_threshold = iou_threshold
-        self.device = device
+        
+        # Device detection
+        if device == "0" and not torch.cuda.is_available():
+            logger.warning("CUDA 'device=0' requested but not available. Falling back to 'cpu'.")
+            self.device = "cpu"
+        else:
+            self.device = device
         
         # Load model
         logger.info(f"Loading model from: {self.model_path}")
