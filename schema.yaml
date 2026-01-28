@@ -51,10 +51,11 @@ label_files:
     - .txt
   
   class_ids:
-    fire: 0
-    smoke: 1
+    Fire: 0
+    default: 1
+    smoke: 2
   
-  num_classes: 2
+  num_classes: 3
   
   coordinate_range:
     min: 0.0
@@ -80,7 +81,7 @@ label_files:
     field_constraints:
       class_id:
         min: 0
-        max: 1
+        max: 2
       x_center:
         min: 0.0
         max: 1.0
@@ -133,14 +134,17 @@ metadata:
   dataset_name: fire_smoke_detection
   version: "1.0"
   description: "Fire and smoke detection dataset for object detection"
-  
   classes:
-    - name: fire
+    - name: Fire
       id: 0
       description: "Fire flames"
     
-    - name: smoke
+    - name: default
       id: 1
+      description: "Default/Other objects"
+    
+    - name: smoke
+      id: 2
       description: "Smoke plumes"
   
   annotation_format: yolo

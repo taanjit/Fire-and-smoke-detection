@@ -1,0 +1,20 @@
+# YOLOv8 Data Configuration
+path: /home/tadmnit/AI_Team/Anjit/Fire_smoke_detection  # root dir
+train: data/train/images
+val: data/valid/images
+test: data/test/images
+
+# Classes
+nc: 3
+names:
+  0: Fire
+  1: default
+  2: smoke
+
+# Metadata (from user)
+roboflow:
+  license: CC BY 4.0
+  project: fire-wrpgm
+  url: https://universe.roboflow.com/custom-thxhn/fire-wrpgm/dataset/8
+  version: 8
+  workspace: custom-thxhn

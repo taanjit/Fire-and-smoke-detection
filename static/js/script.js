@@ -127,7 +127,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             data.detections.forEach(det => {
                 const tag = document.createElement('div');
-                tag.className = 'detection-tag';
+                const className = det.class.toLowerCase();
+                tag.className = `detection-tag tag-${className}`;
                 tag.innerHTML = `
                     <span>${det.class}</span>
                     <span class="conf-pill">${(det.confidence * 100).toFixed(1)}%</span>
@@ -241,7 +242,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const y = y1 * scaleY;
 
             // Color based on class
-            const color = det.class === 'fire' ? '#ff4d00' : '#00f2ff';
+            let color = '#ffffff'; // Default
+            const cls = det.class.toLowerCase();
+            if (cls.includes('fire')) color = '#ff4d00';
+            else if (cls.includes('smoke')) color = '#00f2ff';
+            else if (cls.includes('default')) color = '#00ff88';
 
             ctx.strokeStyle = color;
             ctx.lineWidth = 3;

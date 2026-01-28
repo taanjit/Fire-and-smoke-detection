@@ -6,7 +6,7 @@ MODEL:
   architecture: yolov8  # Options: yolov8, yolov5, faster-rcnn, ssd
   variant: n  # Options: n (nano), s (small), m (medium), l (large), x (extra-large)
   pretrained: true
-  num_classes: 2  # fire and smoke
+  num_classes: 3  # Fire, default, smoke
 
 # Training Hyperparameters
 TRAINING:

@@ -70,8 +70,13 @@ body {
 }
 
 @keyframes move {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(50px, 50px) scale(1.1); }
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(50px, 50px) scale(1.1);
+    }
 }
 
 /* Glassmorphism */
@@ -108,7 +113,9 @@ body {
     font-weight: 700;
 }
 
-.logo-icon { font-size: 1.8rem; }
+.logo-icon {
+    font-size: 1.8rem;
+}
 
 .nav-links {
     display: flex;
@@ -192,7 +199,8 @@ h1 {
     background: rgba(255, 255, 255, 0.02);
 }
 
-.upload-area:hover, .upload-area.dragover {
+.upload-area:hover,
+.upload-area.dragover {
     border-color: var(--primary);
     background: rgba(255, 77, 0, 0.05);
 }
@@ -313,7 +321,7 @@ input[type="range"] {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0, 0, 0, 0.7);
     z-index: 10;
 }
 
@@ -326,7 +334,7 @@ input[type="range"] {
     position: absolute;
     top: 1rem;
     left: 1rem;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
     padding: 0.5rem 1rem;
     border-radius: 30px;
     display: flex;
@@ -342,7 +350,10 @@ input[type="range"] {
     border-radius: 50%;
 }
 
-.status-indicator.online { background: var(--success); box-shadow: 0 0 10px var(--success); }
+.status-indicator.online {
+    background: var(--success);
+    box-shadow: 0 0 10px var(--success);
+}
 
 .webcam-controls {
     margin-top: 2rem;
@@ -398,8 +409,6 @@ input[type="range"] {
 }
 
 .detection-tag {
-    background: rgba(255, 77, 0, 0.15);
-    border: 1px solid var(--primary);
     padding: 0.5rem 1rem;
     border-radius: 10px;
     display: flex;
@@ -408,11 +417,38 @@ input[type="range"] {
 }
 
 .conf-pill {
-    background: var(--primary);
+    background: rgba(255, 255, 255, 0.2);
     font-size: 0.8rem;
     padding: 0.1rem 0.5rem;
     border-radius: 5px;
     font-weight: 700;
+}
+
+.tag-fire {
+    background: rgba(255, 77, 0, 0.15);
+    border: 1px solid var(--primary);
+}
+
+.tag-fire .conf-pill {
+    background: var(--primary);
+}
+
+.tag-smoke {
+    background: rgba(0, 242, 255, 0.15);
+    border: 1px solid var(--secondary);
+}
+
+.tag-smoke .conf-pill {
+    background: var(--secondary);
+}
+
+.tag-default {
+    background: rgba(0, 255, 136, 0.15);
+    border: 1px solid var(--success);
+}
+
+.tag-default .conf-pill {
+    background: var(--success);
 }
 
 /* Loader */
@@ -432,8 +468,13 @@ input[type="range"] {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Modal */
@@ -441,7 +482,7 @@ input[type="range"] {
     position: fixed;
     inset: 0;
     z-index: 2000;
-    background: rgba(0,0,0,0.9);
+    background: rgba(0, 0, 0, 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -490,21 +531,49 @@ input[type="range"] {
     animation: fadeIn 0.8s forwards;
 }
 
-.delay-1 { animation-delay: 0.2s; }
-.delay-2 { animation-delay: 0.4s; }
-.delay-3 { animation-delay: 0.6s; }
-.delay-4 { animation-delay: 0.8s; }
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.delay-1 {
+    animation-delay: 0.2s;
 }
 
-.hidden { display: none !important; }
+.delay-2 {
+    animation-delay: 0.4s;
+}
+
+.delay-3 {
+    animation-delay: 0.6s;
+}
+
+.delay-4 {
+    animation-delay: 0.8s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hidden {
+    display: none !important;
+}
 
 /* Mobile Support */
 @media (max-width: 768px) {
-    h1 { font-size: 2.5rem; }
-    .nav-links { display: none; }
-    .container { padding: 0 1rem; }
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
 }
