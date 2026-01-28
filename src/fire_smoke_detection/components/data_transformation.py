@@ -284,10 +284,14 @@ class DataTransformation:
             self.config.transformed_test_dir / "labels"
         )
         
-        # Create YOLO dataset configuration
-        # Note: Update num_classes and class_names based on your schema
-        class_names = ['fire', 'smoke', 'both']  # Update this based on your classes
+        # Get class names and count from schema
+        class_ids = self.config.schema.get('label_files', {}).get('class_ids', {})
+        # Sort by ID to ensure correct mapping
+        sorted_classes = sorted(class_ids.items(), key=lambda x: x[1])
+        class_names = [name for name, _ in sorted_classes]
         num_classes = len(class_names)
+        
+        logger.info(f"Using {num_classes} classes from schema: {class_names}")
         
         results["config_path"] = self.create_yolo_config(
             self.config.transformed_train_dir,

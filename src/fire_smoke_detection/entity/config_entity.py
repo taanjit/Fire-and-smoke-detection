@@ -37,6 +37,7 @@ class DataTransformationConfig:
     transformed_test_dir: Path
     augmented_data_dir: Path
     image_size: list
+    schema: dict
 
 
 @dataclass(frozen=True)

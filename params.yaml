@@ -35,7 +35,7 @@ TRAINING:
   
   # Multi-GPU Training
   device: 0  # GPU device, or 'cpu' for CPU training
-  workers: 8  # Number of dataloader workers
+  workers: 0  # Set to 0 to fix "Pin memory thread" errors in some environments
 
 # Data Augmentation Parameters
 AUGMENTATION:

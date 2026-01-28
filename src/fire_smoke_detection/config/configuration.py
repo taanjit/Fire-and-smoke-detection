@@ -101,7 +101,8 @@ class ConfigurationManager:
             transformed_train_dir=Path(config.transformed_train_dir),
             transformed_test_dir=Path(config.transformed_test_dir),
             augmented_data_dir=Path(config.augmented_data_dir),
-            image_size=config.image_size
+            image_size=config.image_size,
+            schema=dict(self.schema)
         )
         
         return data_transformation_config
